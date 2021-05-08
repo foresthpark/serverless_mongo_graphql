@@ -1,4 +1,4 @@
-const { ApolloServer } = require("apollo-server");
+const { ApolloServer } = require("apollo-server-lambda");
 const connectDB = require("./config");
 const typeDefs = require("./types");
 const resolvers = require("./resolvers");
@@ -12,4 +12,10 @@ const server = new ApolloServer({
   context: { models },
 });
 
-server.listen().then(({ url }) => console.log(`Server is running on ${url}`));
+exports.handler = server.createHandler({
+  cors: {
+    origin: "*",
+    credentials: false,
+  },
+  endpointURL: "/graphql",
+});
