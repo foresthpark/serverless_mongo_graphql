@@ -22,7 +22,7 @@ functions:
           cors: true
           integration: lambda-proxy
       - http:
-          path: graphql
+          path: playground
           method: get
           cors: true
           integration: lambda-proxy
